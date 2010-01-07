@@ -3,7 +3,11 @@
 A simple test tool for WebServices.
 
 == Installation
-TODO
+1. Build gem file <easytester-x.x.x.gem>.
+>gem build Rakefile
+
+2. Install gem file. You can add some parameters, such as "--no-ri --no-rdoc"
+>gem install easytester-x.x.x.gem
 
 == Usage
-TOTDO
+TODO
