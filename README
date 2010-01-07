@@ -5,9 +5,16 @@ A simple test tool for WebServices.
 == Installation
 1. Build gem file <easytester-x.x.x.gem>.
 >gem build Rakefile
+or
+>rake gem
 
 2. Install gem file. You can add some parameters, such as "--no-ri --no-rdoc"
 >gem install easytester-x.x.x.gem
 
 == Usage
-TODO
+The EasyTester need to work with soap4r and wsdl2ruby. Soap4r is used to invoke WebServices, and wsdl2ruby is used to generate stubs.
+
+TODO:
+1. How to load data
+2. How to validate results
+3. Sample
