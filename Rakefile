@@ -37,7 +37,10 @@ Rake::RDocTask.new do |rdoc|
 end
 
 Rake::TestTask.new do |t|
-  t.test_files = FileList['test/**/*.rb']
+  lib_dir = File.expand_path('lib')
+  test_dir = File.expand_path('test')
+  t.libs = [lib_dir, test_dir]
+  t.test_files = FileList['test/**/*_test.rb']
 end
 
 Spec::Rake::SpecTask.new do |t|
