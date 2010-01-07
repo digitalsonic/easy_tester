@@ -13,7 +13,10 @@ module EasyTester
     # 测试方法,期望结果,参数类,参数...
     class TxtProvider
       attr_accessor :encode
-      @encode = 'UTF-8'
+      
+      def initialize encode = 'UTF-8'
+        @encode = encode
+      end
 	  
       def load_data *args
         load_data_from_file args[0]
