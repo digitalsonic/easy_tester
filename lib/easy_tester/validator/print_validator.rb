@@ -5,7 +5,10 @@ module EasyTester
     # 简单打印结果
     class PrintValidator
       attr_accessor :encode
-      @encode = 'UTF-8'
+
+      def initialize encode = 'UTF-8'
+        @encode = encode
+      end
 
       def validate expectation, result
         puts "[result - START]"
