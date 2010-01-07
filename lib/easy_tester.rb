@@ -5,10 +5,9 @@ require 'easy_tester/provider/txt_provider'
 gem 'soap4r'
 
 module EasyTester
-  include EasyTester::Validator
-  
   # 测试用例执行器
   class EasyTester
+    include Validator
     attr_accessor :data_file, :data_provider, :encode
 
     def initialize encode = 'UTF-8'
@@ -37,7 +36,7 @@ module EasyTester
     # 加载测试数据
     def load_test_data file
       @logger.info "Loading test data..."
-      @data_provider = EasyTester::Provider::TxtProvider.new if @data_provider.nil?
+      @data_provider = Provider::TxtProvider.new if @data_provider.nil?
       @data_provider.encode = @encode if @data_provider.respond_to?("encode=".intern)
       @data_provider.load_data file
     end
