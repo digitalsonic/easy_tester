@@ -1,4 +1,4 @@
 # WS_Driver,WS_URL
 LocalService;http://localhost:8080/services/localService?wsdl
-# 测试方法,期望结果,参数类,参数...
+# TestMethod,ValidatorClass,Expectations,ParameterClass,Parameters
 method;SimpleValidator;1;ParamClass;'params'
