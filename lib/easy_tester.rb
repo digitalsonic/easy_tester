@@ -37,7 +37,7 @@ module EasyTester
     def load_test_data file
       @logger.info "Loading test data..."
       @data_provider = Provider::TxtProvider.new if @data_provider.nil?
-      @data_provider.encode = @encode if @data_provider.respond_to?("encode=".intern)
+      set_encode_charset @data_provider
       @data_provider.load_data file
     end
 
@@ -64,9 +64,13 @@ module EasyTester
     # 验证结果
     def validate_result data, result
       validator = eval("#{data.validator}.new")
-      validator.encode = @encode if validator.respond_to?("encode=".intern)
+      set_encode_charset validator
       validator.validate data.expectation, result unless validator.nil?
       @logger.info "Validating Success!"
+    end
+
+    def set_encode_charset obj
+      obj.encode = @encode if obj.respond_to?("encode=".intern)
     end
   end
 end
