@@ -34,6 +34,7 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "EasyTester Docs"
   rdoc.rdoc_dir = 'doc/rdoc' # rdoc output folder
   rdoc.options << '--line-numbers'
+  rdoc.options << '--charset' << 'utf-8'
 end
 
 Rake::TestTask.new do |t|

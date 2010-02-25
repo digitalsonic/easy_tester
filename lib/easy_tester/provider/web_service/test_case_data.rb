@@ -4,7 +4,7 @@ module EasyTester
   module Provider
     module WebService
       # 测试数据
-      class TestcaseData
+      class TestCaseData
         include Util
         attr_accessor :test_method, :validator, :expectation, :parameters_class, :parameters
 

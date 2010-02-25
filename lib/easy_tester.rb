@@ -19,7 +19,6 @@ module EasyTester
 
     # 根据名字取得Executor
     def get_executor name
-      executor = nil
       case name
       when :webservice
         require 'easy_tester/executor/web_service_executor'

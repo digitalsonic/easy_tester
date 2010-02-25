@@ -1,6 +1,6 @@
 require 'iconv'
 require 'easy_tester/provider/web_service/data'
-require 'easy_tester/provider/web_service/testcase_data'
+require 'easy_tester/provider/web_service/test_case_data'
 require 'easy_tester/provider/web_service/web_service_info'
 require 'easy_tester/util'
 
@@ -10,21 +10,17 @@ module EasyTester
       # TXT测试数据提取类，忽略#开头的注释
       # 数据格式：
       # Driver,wsdl
-      # 测试方法,期望结果,参数类,参数...
-      # 测试方法,期望结果,参数类,参数...
+      # 测试方法,验证器类,期望结果,参数类,参数...
+      # 测试方法,验证器类,期望结果,参数类,参数...
       class TxtProvider
         attr_accessor :encode
       
         def initialize encode = 'UTF-8'
           @encode = encode
         end
-	  
-        def load_data *args
-          load_data_from_file args[0]
-        end
 
         # 从文件中加载数据
-        def load_data_from_file file_path
+        def load_data file_path
           data = nil
           if File.exist?(file_path)
             file = File.new file_path
@@ -51,7 +47,7 @@ module EasyTester
 
         # 解析数据明细
         def parse_detail line
-          tc = TestcaseData.new
+          tc = TestCaseData.new
           tc.test_method, tc.validator, tc.expectation, tc.parameters_class, *tc.parameters = (line.split /;/)
           tc
         end
