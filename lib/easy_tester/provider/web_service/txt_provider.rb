@@ -2,7 +2,7 @@ require 'iconv'
 require 'easy_tester/provider/web_service/data'
 require 'easy_tester/provider/web_service/testcase_data'
 require 'easy_tester/provider/web_service/web_service_info'
-require 'easy_tester/util/value_util'
+require 'easy_tester/util'
 
 module EasyTester
   module Provider

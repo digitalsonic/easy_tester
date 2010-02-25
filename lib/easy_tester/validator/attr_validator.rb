@@ -1,5 +1,5 @@
 require 'test/unit/assertions'
-require 'easy_tester/util/value_util'
+require 'easy_tester/util'
 
 module EasyTester
   module Validator
@@ -7,7 +7,7 @@ module EasyTester
     # key1=value1|key2=value2
     class AttrValidator
       include Test::Unit::Assertions
-      include EasyTester::Util::ValueUtil
+      include Util
     
       def validate expectation, result
         value_map = {}

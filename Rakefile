@@ -8,7 +8,7 @@ require 'spec/rake/spectask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'easytester'
-  s.version = '0.1.0'
+  s.version = '0.1.5'
   s.has_rdoc = true
   s.extra_rdoc_files = ['README', 'LICENSE']
   s.summary = 'A simle test tool for WebServices.'
