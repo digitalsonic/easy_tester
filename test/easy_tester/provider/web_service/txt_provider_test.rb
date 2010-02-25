@@ -1,10 +1,10 @@
-$:.unshift File.join(File.dirname(__FILE__),'../../..','lib')
+$:.unshift File.join(File.dirname(__FILE__),'../../../..','lib')
 
 require 'test/unit'
-require 'easy_tester/provider/txt_provider'
+require 'easy_tester/provider/web_service/txt_provider'
 
 class TxtroviderTest < Test::Unit::TestCase
-  include EasyTester::Provider
+  include EasyTester::Provider::WebService
 
   def test_load_data
     data_file = File.dirname(__FILE__) + "/txt_test_data_file.txt"

@@ -1,7 +1,7 @@
 require 'logger'
 require 'rubygems'
 require 'easy_tester/validator/validator'
-require 'easy_tester/provider/txt_provider'
+require 'easy_tester/provider/web_service/txt_provider'
 gem 'soap4r'
 
 module EasyTester

@@ -2,13 +2,13 @@ $:.unshift File.join(File.dirname(__FILE__),'../','lib')
 
 require 'test/unit'
 require 'easy_tester'
-require 'easy_tester/provider/testcase_data'
+require 'easy_tester/provider/web_service/testcase_data'
 
 class EasyTesterTest < Test::Unit::TestCase
   def test_make_request_parameters
     tester = EasyTester::EasyTester.new
 
-    data = EasyTester::Provider::TestcaseData.new
+    data = EasyTester::Provider::WebService::TestcaseData.new
     data.expectation = '1'
     data.test_method = 'test'
     data.parameters = ["1", "'2'"]
