@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'nokogiri'
 require 'test/unit/assertions'
 require 'easy_tester/util'
