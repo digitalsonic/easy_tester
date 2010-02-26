@@ -12,7 +12,11 @@ module EasyTester
 
       def validate expectation, result
         puts "[result - START]"
-        result.instance_variables.each { |var| puts var + "=" + Iconv.iconv(@encode, "UTF-8", result.instance_variable_get(var)).to_s }
+        if result.instance_of?(String)
+          puts Iconv.iconv(@encode, "UTF-8", result)
+        else
+          result.instance_variables.each { |var| puts var + "=" + Iconv.iconv(@encode, "UTF-8", result.instance_variable_get(var)).to_s }
+        end
         puts "[result - END]"
       end
     end

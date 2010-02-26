@@ -7,14 +7,15 @@ module EasyTester
     include Util
     attr_accessor :data_file, :data_provider, :encode
 
-    def initialize encode = 'UTF-8'
-      @logger = create_default_logger
+    def initialize encode = 'UTF-8', logger_level = Logger::INFO
+      @logger = create_default_logger(logger_level)
       @encode = encode
     end
 
-    # 执行测试
-    def execute_test executor
-      get_executor(executor).execute_test
+    # 执行测试，目前支持执行器:webservice和:web
+    # 可提供一个{|data|...}块，在执行测试前处理数据
+    def execute_test executor_name, &block
+      get_executor(executor_name).execute_test &block
     end
 
     # 根据名字取得Executor
@@ -22,9 +23,10 @@ module EasyTester
       case name
       when :webservice
         require 'easy_tester/executor/web_service_executor'
-        executor = Executor::WebServiceExecutor.new @encode, @logger
+        executor = Executor::WebServiceExecutor.new({:encode => @encode, :logger => @logger})
       when :web
-        # TODO:
+        require 'easy_tester/executor/web_executor'
+        executor = Executor::WebExecutor.new({:encode => @encode, :logger => @logger})
       else
         raise "Can not find the specified executor #{name}"
       end

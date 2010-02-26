@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'easy_tester/executor/base_executor'
-require 'easy_tester/validator/validator'
 require 'easy_tester/provider/web_service/txt_provider'
 gem 'soap4r'
 
@@ -8,13 +7,15 @@ module EasyTester
   module Executor
     # WebService测试用例执行器
     class WebServiceExecutor < BaseExecutor
-      include Validator
       attr_accessor :data_file, :data_provider, :encode, :logger
 
       # 执行测试
       def execute_test
         @logger.info "Initializing..."
         data = load_test_data @data_file
+
+        yield(data) if block_given?
+
         obj = create_ws_obj data.ws_info.ws_driver, data.ws_info.wsdl_url
         data_list = data.test_cases
 

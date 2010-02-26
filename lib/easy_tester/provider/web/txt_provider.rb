@@ -21,11 +21,15 @@ module EasyTester
           data = []
           if File.exist?(file_path)
             file = File.new file_path
+            is_first_line = true
+            server = nil
+            port = 80
             file.each do |line|
               line = Iconv.iconv("UTF-8", @encode, line.strip).to_s
               next if line =~ /^#/ or line.empty?
-              if data.empty?
-                server, port = line.split /;/
+              if is_first_line
+                server, port = line.split(/;/)
+                is_first_line = false
                 next
               end
               test_case = parse_detail line

@@ -1,9 +1,11 @@
 require 'easy_tester/util'
+require 'easy_tester/validator/validator'
 
 module EasyTester
   module Executor
     class BaseExecutor
       include Util
+      include Validator
       attr_accessor :data_file, :data_provider, :encode, :logger
 
       def initialize options = {}
@@ -14,12 +16,10 @@ module EasyTester
       # 验证结果
       def validate_result data, result
         validator = eval("#{data.validator}.new")
-        set_encode_charset validator
+        set_encode_charset validator, @encode
         validator.validate data.expectation, result unless validator.nil?
         @logger.info "Validating Success!"
       end
-      
-      #protected :data_file, :data_provider, :encode, :logger
     end
   end
 end
