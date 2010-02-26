@@ -1,21 +1,13 @@
-require 'logger'
 require 'net/http'
 require 'easy_tester/validator/validator'
-require 'easy_tester/util'
+require 'easy_tester/executor/base_executor'
 require 'easy_tester/provider/web/txt_provider'
 
 module EasyTester
   module Executor
-    class WebExecutor
+    class WebExecutor < BaseExecutor
       include Validator
-      include Util
-      attr_writer :logger
-      attr_accessor :data_file, :data_provider, :encode
-
-      def initialize encode = 'UTF-8', logger = nil
-        @logger = logger || create_default_logger
-        @encode = encode
-      end
+      attr_accessor :data_file, :data_provider, :encode, :logger
 
       # 执行测试
       def execute_test
@@ -53,14 +45,6 @@ module EasyTester
           @logger.warn "Exception occured when #{data.method} #{data.url} with #{data.parameters}"
         end
         result
-      end
-
-      # 验证结果
-      def validate_result data, result
-        validator = eval("#{data.validator}.new")
-        set_encode_charset validator
-        validator.validate data.expectation, result unless validator.nil?
-        @logger.info "Validating Success!"
       end
     end
   end

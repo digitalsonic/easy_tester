@@ -8,7 +8,8 @@ module EasyTester
   module Executor
     class WebExecutorTest < Test::Unit::TestCase
       def test_get_result
-        executor = EasyTester::Executor::WebExecutor.new
+        executor = EasyTester::Executor::WebExecutor.new({:encode => 'GBK'})
+        assert_equal 'GBK', executor.encode
         data = EasyTester::Provider::Web::TestCaseData.new
         data.server = 'www.google.com'
         data.port = '80'

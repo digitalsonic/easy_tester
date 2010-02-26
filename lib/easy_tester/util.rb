@@ -1,3 +1,5 @@
+require 'logger'
+
 module EasyTester
   module Util
     # 转换特定格式的字符串值

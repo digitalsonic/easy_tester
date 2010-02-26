@@ -8,7 +8,7 @@ module EasyTester
       # TXT测试数据提取类，忽略#开头的注释
       # 数据格式：
       # Server;Port
-      # URL;HTTP METHOD;验证器类;期望结果;"参数"
+      # URL;HTTP METHOD;"参数";验证器类;期望结果...
       class TxtProvider
         attr_accessor :encode
 
@@ -39,7 +39,7 @@ module EasyTester
 
         def parse_detail line
           tc = TestCaseData.new
-          tc.url, tc.method, tc.validator, tc.expectation, tc.parameters = (line.split /;/)
+          tc.url, tc.method, tc.parameters, tc.validator, *tc.expectation = (line.split /;/)
           tc
         end
       end

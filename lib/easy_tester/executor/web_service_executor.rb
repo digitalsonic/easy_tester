@@ -1,23 +1,15 @@
-require 'logger'
 require 'rubygems'
+require 'easy_tester/executor/base_executor'
 require 'easy_tester/validator/validator'
-require 'easy_tester/util'
 require 'easy_tester/provider/web_service/txt_provider'
 gem 'soap4r'
 
 module EasyTester
   module Executor
     # WebService测试用例执行器
-    class WebServiceExecutor
+    class WebServiceExecutor < BaseExecutor
       include Validator
-      include Util
-      attr_writer :logger
-      attr_accessor :data_file, :data_provider, :encode
-
-      def initialize encode = 'UTF-8', logger = nil
-        @logger = logger || create_default_logger
-        @encode = encode
-      end
+      attr_accessor :data_file, :data_provider, :encode, :logger
 
       # 执行测试
       def execute_test
@@ -62,14 +54,6 @@ module EasyTester
       def execute_method ws_stub, method_name, parameters
         @logger.info "Invoking method: #{method_name} Parameters: #{parameters.inspect}"
         ws_stub.send method_name.intern, parameters unless ws_stub.nil?
-      end
-
-      # 验证结果
-      def validate_result data, result
-        validator = eval("#{data.validator}.new")
-        set_encode_charset validator
-        validator.validate data.expectation, result unless validator.nil?
-        @logger.info "Validating Success!"
       end
     end
   end
