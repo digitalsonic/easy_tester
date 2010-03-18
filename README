@@ -1,6 +1,6 @@
 == EasyTester
 
-A simple test tool for WebServices.
+A simple test tool for WebServices and Web.
 
 == Installation
 1. Build gem file <easytester-x.x.x.gem>.
@@ -11,10 +11,15 @@ or
 2. Install gem file. You can add some parameters, such as "--no-ri --no-rdoc"
 >gem install easytester-x.x.x.gem
 
-== Usage
-The EasyTester need to work with soap4r and wsdl2ruby. Soap4r is used to invoke WebServices, and wsdl2ruby is used to generate stubs.
+== Dependencies
+1. soap4r and wsdl2ruby. 
+Soap4r is used to invoke WebServices, and wsdl2ruby is used to generate stubs.
+>gem install jruby-openssl soap4r
+
+2. Nokogiri
+Nokogiri is needed when parsing XPath.
+>gem install nokogiri
 
 TODO:
-1. How to load data
-2. How to validate results
-3. Sample
+1. Documents
+2. Samples
