@@ -15,7 +15,7 @@ module EasyTester
         if result.instance_of?(String)
           puts Iconv.iconv(@encode, "UTF-8", result)
         else
-          result.instance_variables.each { |var| puts var + "=" + Iconv.iconv(@encode, "UTF-8", result.instance_variable_get(var)).to_s }
+          result.instance_variables.each { |var| puts var + "=" + Iconv.iconv(@encode, "UTF-8", result.instance_variable_get(var).to_s).to_s }
         end
         puts "[result - END]"
       end
