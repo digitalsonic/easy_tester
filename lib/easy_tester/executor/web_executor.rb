@@ -19,6 +19,7 @@ module EasyTester
           result = get_result data
           validate_result data, result
         end
+        print_validation_result
       end
 
       # 加载测试数据

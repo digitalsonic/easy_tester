@@ -27,6 +27,7 @@ module EasyTester
             validate_result tc_data, result
           end
         end
+        print_validation_result
       end
 
       # 加载测试数据
