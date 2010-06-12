@@ -42,9 +42,9 @@ class TxtroviderTest < Test::Unit::TestCase
     assert_not_nil tc.parameters
     assert_kind_of Array, tc.parameters
     assert_equal 4, tc.parameters.size
-    assert_equal 'aa', tc.parameters[0]
-    assert_equal 1, tc.parameters[1]
-    assert_equal 1.1, tc.parameters[2]
-    assert Time.new - (60 * 60 * 24 * 100) - tc.parameters[3] < 10
+    assert_equal ['in0', 'aa'], tc.parameters[0]
+    assert_equal ['in1', '1'], tc.parameters[1]
+    assert_equal ['in2', '1.1'], tc.parameters[2]
+    assert Time.new - (60 * 60 * 24 * 100) - tc.parameters[3][1] < 10
   end
 end

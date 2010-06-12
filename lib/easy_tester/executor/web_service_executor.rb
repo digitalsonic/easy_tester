@@ -48,7 +48,7 @@ module EasyTester
       def make_request_parameters data
         @logger.debug "Construct parameters, total count: #{data.parameters.size}"
         param = eval("#{data.parameters_class}.new")
-        data.parameters.each_index { |idx| param.send("in#{idx}=".intern, data.parameters[idx]) }
+        data.parameters.each { |name_and_value| param.send("#{name_and_value[0]}=".intern, name_and_value[1]) }
         param
       end
 
