@@ -3,7 +3,7 @@ $:.unshift File.join(File.dirname(__FILE__),'../../../..','lib')
 require 'test/unit'
 require 'easy_tester/provider/web_service/txt_provider'
 
-class TxtroviderTest < Test::Unit::TestCase
+class TxtProviderTest < Test::Unit::TestCase
   include EasyTester::Provider::WebService
 
   def test_load_data
@@ -43,8 +43,8 @@ class TxtroviderTest < Test::Unit::TestCase
     assert_kind_of Array, tc.parameters
     assert_equal 4, tc.parameters.size
     assert_equal ['in0', 'aa'], tc.parameters[0]
-    assert_equal ['in1', '1'], tc.parameters[1]
-    assert_equal ['in2', '1.1'], tc.parameters[2]
+    assert_equal ['in1', 1], tc.parameters[1]
+    assert_equal ['in2', 1.1], tc.parameters[2]
     assert Time.new - (60 * 60 * 24 * 100) - tc.parameters[3][1] < 10
   end
 end
