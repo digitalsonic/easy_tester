@@ -9,13 +9,13 @@ class TxtroviderTest < Test::Unit::TestCase
   # URL;HTTP METHOD;验证器类;期望结果;"参数"
   def test_parse_detail
     time = Time.new
-    line = "/url;get;\"abc&\#{Time.new}\";SimpleValidator;aa;bb;cc"
+    line = "/url;get;\"param1=abc&param2=\#{Time.new}\";SimpleValidator;aa;bb;cc"
     provider = TxtProvider.new
     tc = provider.parse_detail line
     assert_equal '/url', tc.url
     assert_equal 'GET', tc.method
     assert_equal 'SimpleValidator', tc.validator
-    assert_equal "abc&#{time}", tc.parameters
+    assert_equal "param1=abc&param2=#{time}", tc.parameters
     
     assert_not_nil tc.expectation
     assert_kind_of Array, tc.expectation
