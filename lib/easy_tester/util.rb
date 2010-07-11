@@ -1,4 +1,6 @@
 require 'logger'
+require 'digest/md5'
+require 'digest/sha1'
 
 module EasyTester
   module Util
@@ -30,6 +32,16 @@ module EasyTester
     # 如果给定对象有encode=方法，则通过该方法来设置编码
     def set_encode_charset obj, encode
       obj.encode = encode if !obj.nil? && obj.respond_to?("encode=".intern)
+    end
+
+    # 计算给定内容的MD5
+    def md5 src
+      Digest::MD5.hexdigest src
+    end
+
+    # 计算给定内容的SHA-1
+    def sha1 src
+      Digest::SHA1.hexdigest src
     end
   end
 end
