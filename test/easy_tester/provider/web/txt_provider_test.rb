@@ -4,7 +4,7 @@ require 'test/unit'
 require 'digest/md5'
 require 'easy_tester/provider/web/txt_provider'
 
-class TxtroviderTest < Test::Unit::TestCase
+class TxtProviderTest < Test::Unit::TestCase
   include EasyTester::Provider::Web
 
   # URL;HTTP METHOD;验证器类;期望结果;"参数"
