@@ -1,4 +1,5 @@
 require 'net/http'
+require 'uri'
 require 'easy_tester/executor/base_executor'
 require 'easy_tester/provider/web/txt_provider'
 
@@ -41,7 +42,7 @@ module EasyTester
             if data.parameters.nil? || data.parameters.empty?
               http.get data.url
             else
-              http.get data.url + "?" + data.parameters
+              http.get data.url + "?" + URI.encode(data.parameters)
             end
           end
         }
