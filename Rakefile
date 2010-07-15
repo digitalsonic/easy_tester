@@ -11,14 +11,17 @@ spec = Gem::Specification.new do |s|
   s.version = '0.1.5'
   s.has_rdoc = true
   s.extra_rdoc_files = ['README', 'LICENSE']
-  s.summary = 'A simle test tool for WebServices.'
-  s.description = s.summary
+  s.summary = 'A simple test tool for WebService and Web.'
+  s.description = "A simple test tool for WebService and Web (eg. HTTP gateway.do response). All you need is to write a short script and prepare the test case."
   s.author = 'DigitalSonic'
   s.email = 'digitalsonic.dxf@gmail.com'
   # s.executables = ['your_executable_here']
   s.files = %w(LICENSE README Rakefile) + Dir.glob("{bin,lib,spec}/**/*")
   s.require_path = "lib"
   s.bindir = "bin"
+  s.add_dependency('jruby-openssl', '~> 0.7') if RUBY_PLATFORM =~ /java/
+  s.add_dependency('soap4r', '~> 1.5')
+  s.add_dependency('nokogiri', '~> 1.4')
 end
 
 Rake::GemPackageTask.new(spec) do |p|
