@@ -1,0 +1,29 @@
+h1. EasyTester README
+
+p. EasyTester is a simple test tool for *WebService* and *Web* (__eg. HTTP gateway.do response__). All you have to do is to write a short script and prepare the test case.
+
+h2. Installation
+
+p. 1. download the sources
+
+p. 2. build gem file
+You can use either gem or rake command to build the gem file(easytester-x.x.x.gem).
+@gem build Rakefile@
+or
+@rake gem@
+
+p. 3. install gem file
+Find the .gem file just built, and run this command: 
+@gem install easytester-x.x.x.gem@
+
+h2. Dependencies
+
+p. 1. Soap4R
+Soap4R is used to invoke WebServices, and wsdl2ruby.rb is used to generate stubs.
+@gem install soap4r@
+
+p. 2. Nokogiri
+Nokogiri is needed when parsing XPath.
+@gem install nokogiri@
+
+p. __NOTE: All the dependencies are installed automatically.__
