@@ -19,7 +19,6 @@ spec = Gem::Specification.new do |s|
   s.files = %w(LICENSE README Rakefile) + Dir.glob("{bin,lib,spec}/**/*")
   s.require_path = "lib"
   s.bindir = "bin"
-  s.add_dependency('jruby-openssl', '~> 0.7') if RUBY_PLATFORM =~ /java/
   s.add_dependency('soap4r', '~> 1.5')
   s.add_dependency('nokogiri', '~> 1.4')
 end
