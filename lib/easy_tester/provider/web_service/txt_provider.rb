@@ -1,4 +1,5 @@
 require 'iconv'
+require 'yaml'
 require 'easy_tester/provider/web_service/data'
 require 'easy_tester/provider/web_service/test_case_data'
 require 'easy_tester/provider/web_service/web_service_info'
@@ -13,10 +14,11 @@ module EasyTester
       # 测试方法;验证器类;期望结果;参数类;参数...
       # 测试方法;验证器类;期望结果;参数类;参数...
       class TxtProvider
-        attr_accessor :encode
+        attr_accessor :encode, :holder
       
-        def initialize encode = 'UTF-8'
+        def initialize encode = 'UTF-8', holder_file = nil
           @encode = encode
+          @holder = YAML.load(File.open(holder_file)) unless holder_file.nil?
         end
 
         # 从文件中加载数据
@@ -41,8 +43,9 @@ module EasyTester
 
         # 解析文件头
         def parse_head line
-          head_data = line.split /;/
-          WebServiceInfo.new head_data[0], head_data[1]
+          driver, wsdl = line.split /;/
+          driver, wsdl = process_driver_and_wsdl driver, wsdl unless @holder.nil?
+          WebServiceInfo.new driver, wsdl
         end
 
         # 解析数据明细
@@ -50,6 +53,13 @@ module EasyTester
           tc = TestCaseData.new
           tc.test_method, tc.validator, tc.expectation, tc.parameters_class, *tc.parameters = (line.split /;/)
           tc
+        end
+
+        # 如果提供了@holder map，则根据其中的属性替换driver和wsdl的值
+        def process_driver_and_wsdl origin_driver, origin_wsdl
+          driver = eval("\"#{origin_driver}\"")
+          wsdl = eval("\"#{origin_wsdl}\"")
+          [driver, wsdl]
         end
       end
     end

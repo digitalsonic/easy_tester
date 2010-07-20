@@ -24,4 +24,17 @@ class TxtProviderTest < Test::Unit::TestCase
     assert_equal 3, tc.expectation.size
     assert_equal 'aa', tc.expectation[0]
   end
+
+  def test_process_server_and_port
+    provider = TxtProvider.new
+    provider.holder = {"domain" => "abc.com", "port" => "80"}
+    server, port = provider.process_server_and_port "www.\#{@holder['domain']}", "\#{@holder['port']}"
+    assert_equal "www.abc.com", server
+    assert_equal 80, port
+
+    provider = TxtProvider.new 'UTF-8', "#{File.dirname(__FILE__)}/holder.yml"
+    server, port = provider.process_server_and_port "www.\#{@holder['domain']}", "\#{@holder['port']}"
+    assert_equal "www.123.com", server
+    assert_equal 8080, port
+  end
 end

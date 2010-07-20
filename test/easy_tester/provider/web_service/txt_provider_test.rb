@@ -47,4 +47,12 @@ class TxtProviderTest < Test::Unit::TestCase
     assert_equal ['in2', 1.1], tc.parameters[2]
     assert Time.new - (60 * 60 * 24 * 100) - tc.parameters[3][1] < 10
   end
+
+  def test_process_driver_and_wsdl
+    provider = TxtProvider.new
+    provider.holder = {"domain" => "localhost:8080", "driver" => "Service"}
+    driver, wsdl = provider.process_driver_and_wsdl("\#{@holder['driver']}", "http://\#{@holder['domain']}/services/localService?wsdl")
+    assert_equal "Service", driver
+    assert_equal "http://localhost:8080/services/localService?wsdl", wsdl
+  end
 end

@@ -1,4 +1,5 @@
 require 'iconv'
+require 'yaml'
 require 'easy_tester/provider/web/test_case_data'
 require 'easy_tester/util'
 
@@ -10,10 +11,11 @@ module EasyTester
       # Server;Port
       # URL;HTTP METHOD;"参数";验证器类;期望结果...
       class TxtProvider
-        attr_accessor :encode
+        attr_accessor :encode, :holder
 
-        def initialize encode = 'UTF-8'
+        def initialize encode = 'UTF-8', holder_file = nil
           @encode = encode
+          @holder = YAML.load(File.open(holder_file)) unless holder_file.nil?
         end
         
         # 从文件中加载数据
@@ -29,6 +31,7 @@ module EasyTester
               next if line =~ /^#/ or line.empty?
               if is_first_line
                 server, port = line.split(/;/)
+                server, port = process_server_and_port server, port unless @holder.nil?
                 is_first_line = false
                 next
               end
@@ -45,6 +48,13 @@ module EasyTester
           tc = TestCaseData.new
           tc.url, tc.method, tc.parameters, tc.validator, *tc.expectation = (line.split /;/)
           tc
+        end
+
+        # 如果提供了@holder map，则根据其中的属性替换server和port的值
+        def process_server_and_port origin_server, origin_port
+          server = eval("\"#{origin_server}\"")
+          port = eval("\"#{origin_port}\".to_i")
+          [server, port]
         end
       end
     end
