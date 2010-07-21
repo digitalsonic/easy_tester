@@ -10,13 +10,13 @@ spec = Gem::Specification.new do |s|
   s.name = 'easytester'
   s.version = '0.1.5'
   s.has_rdoc = true
-  s.extra_rdoc_files = ['README', 'LICENSE']
+  s.extra_rdoc_files = ['README.textile', 'LICENSE']
   s.summary = 'A simple test tool for WebService and Web.'
   s.description = "A simple test tool for WebService and Web (eg. HTTP gateway.do response). All you need is to write a short script and prepare the test case."
   s.author = 'DigitalSonic'
   s.email = 'digitalsonic.dxf@gmail.com'
   # s.executables = ['your_executable_here']
-  s.files = %w(LICENSE README Rakefile) + Dir.glob("{bin,lib,spec}/**/*")
+  s.files = %w(LICENSE README.textile Rakefile) + Dir.glob("{bin,lib,spec}/**/*")
   s.require_path = "lib"
   s.bindir = "bin"
   s.add_dependency('soap4r', '~> 1.5')
