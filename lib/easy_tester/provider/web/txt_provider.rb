@@ -28,7 +28,7 @@ module EasyTester
             port = 80
             file.each do |line|
               line = Iconv.iconv("UTF-8", @encode, line.strip).to_s
-              next if line =~ /^#/ or line.empty?
+              next if line =~ /^#\s/ or line.empty?
               if is_first_line
                 server, port = line.split(/;/)
                 server, port = process_server_and_port server, port unless @holder.nil?

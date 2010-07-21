@@ -29,7 +29,7 @@ module EasyTester
             data = Data.new
             file.each do |line|
               line = Iconv.iconv("UTF-8", @encode, line.strip).to_s
-              next if line =~ /^#/ or line.empty?
+              next if line =~ /^#\s/ or line.empty?
               if data.ws_info.nil?
                 data.ws_info = parse_head line
                 next
