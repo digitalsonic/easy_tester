@@ -18,7 +18,8 @@ module EasyTester
               param_value = translate_value(@parameters[idx])
             else
               param_name = params[0]
-              param_value = translate_value(params[1])
+			  value = @parameters[idx][@parameters[idx].index('=') + 1, @parameters[idx].size]
+              param_value = translate_value(value)
             end
             
             @parameters[idx] = [param_name, param_value]
