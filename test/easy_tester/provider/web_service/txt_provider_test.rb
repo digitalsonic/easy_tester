@@ -13,7 +13,7 @@ class TxtProviderTest < Test::Unit::TestCase
     ws_info = data.ws_info
     tc = data.test_cases[0]
     assert_equal 'LocalService', ws_info.ws_driver
-    assert_equal 'http://localhost:8080/services/localService?wsdl', ws_info.wsdl_url
+    assert_equal 'http://localhost:8080/services/localService?wsdl', ws_info.endpoint
     assert_equal 'method', tc.test_method
     assert_equal 'SimpleValidator', tc.validator
     assert_equal '1', tc.expectation
@@ -26,7 +26,7 @@ class TxtProviderTest < Test::Unit::TestCase
     provider = TxtProvider.new
     ws_info = provider.parse_head line
     assert_equal 'LocalService', ws_info.ws_driver
-    assert_equal 'http://localhost:8080/services/localService?wsdl', ws_info.wsdl_url
+    assert_equal 'http://localhost:8080/services/localService?wsdl', ws_info.endpoint
   end
 
   # 测试方法,期望结果,参数类,参数...
@@ -51,8 +51,8 @@ class TxtProviderTest < Test::Unit::TestCase
   def test_process_driver_and_wsdl
     provider = TxtProvider.new
     provider.holder = {"domain" => "localhost:8080", "driver" => "Service"}
-    driver, wsdl = provider.process_driver_and_wsdl("\#{@holder['driver']}", "http://\#{@holder['domain']}/services/localService?wsdl")
+    driver, endpoint = provider.process_driver_and_endpoint("\#{@holder['driver']}", "http://\#{@holder['domain']}/services/localService?wsdl")
     assert_equal "Service", driver
-    assert_equal "http://localhost:8080/services/localService?wsdl", wsdl
+    assert_equal "http://localhost:8080/services/localService?wsdl", endpoint
   end
 end

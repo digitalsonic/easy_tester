@@ -16,7 +16,7 @@ module EasyTester
 
         yield(data) if block_given?
 
-        obj = create_ws_obj data.ws_info.ws_driver, data.ws_info.wsdl_url
+        obj = create_ws_obj data.ws_info.ws_driver, data.ws_info.endpoint
         data_list = data.test_cases
 
         unless obj.nil?
@@ -39,9 +39,9 @@ module EasyTester
       end
 
       # 创建WebService
-      def create_ws_obj driver, wsdl
-        @logger.info "Creating web service stub: #{driver}, wsdl: #{wsdl}"
-        eval "#{driver}.new '#{wsdl}'"
+      def create_ws_obj driver, endpoint
+        @logger.info "Creating web service stub: #{driver}, endpoint: #{endpoint}"
+        eval "#{driver}.new '#{endpoint}'"
       end
 
       # 构造参数

@@ -43,9 +43,9 @@ module EasyTester
 
         # 解析文件头
         def parse_head line
-          driver, wsdl = line.split /;/
-          driver, wsdl = process_driver_and_wsdl driver, wsdl unless @holder.nil?
-          WebServiceInfo.new driver, wsdl
+          driver, endpoint = line.split /;/
+          driver, endpoint = process_driver_and_endpoint driver, endpoint unless @holder.nil?
+          WebServiceInfo.new driver, endpoint
         end
 
         # 解析数据明细
@@ -55,11 +55,11 @@ module EasyTester
           tc
         end
 
-        # 如果提供了@holder map，则根据其中的属性替换driver和wsdl的值
-        def process_driver_and_wsdl origin_driver, origin_wsdl
+        # 如果提供了@holder map，则根据其中的属性替换driver和endpoint的值
+        def process_driver_and_endpoint origin_driver, origin_endpoint
           driver = eval("\"#{origin_driver}\"")
-          wsdl = eval("\"#{origin_wsdl}\"")
-          [driver, wsdl]
+          endpoint = eval("\"#{origin_endpoint}\"")
+          [driver, endpoint]
         end
       end
     end
